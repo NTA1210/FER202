@@ -1,25 +1,27 @@
-let results = [];
-
-let search = '';
+import React, { useState } from 'react';
 
 function Ex10({employees}) {
 
+    const [results, setResults] = useState([]);
+    let search = "";
     const handleSearch = () => {
-        results = [];
-        const result = employees.filter(employee => employee.name.toLowerCase().includes(search.toLowerCase()));
-        results = [...result]
-        console.log(results , search);
-        
+        const filteredResults = employees.filter(employee => 
+            employee.name.toLowerCase().includes(search.toLowerCase())
+        );
+        setResults(filteredResults);
     }
-
-    const result = () =>{
-        const results =  employees.filter(employee => employee.name.toLowerCase().includes(search.toLowerCase()));
+    const result = () => {
         return results.map((employee, index) => (
-            <li key={employee.id || index + 1}>
-                {employee.name} - {employee.department} - {employee.age}
+            <li key={index}>
+                <h1>Name: {employee.name}</h1>
+                <p>Age: {employee.age}</p>
+                <p>Department: {employee.department}</p>
             </li>
         ));
     }
+    
+
+
     return ( 
         <div>
             <h1> EX10 : Search Employee</h1>
