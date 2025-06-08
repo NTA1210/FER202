@@ -1,6 +1,6 @@
 function Booking() {
   return (
-    <div className="container mt-4 text-white">
+    <div className="container mt-4 text-white px-5">
       <h2 className="mb-1 text-center">Book Your Table</h2>
       <form>
         <div className="row mb-5">
