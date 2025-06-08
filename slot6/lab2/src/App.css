@@ -2,10 +2,10 @@
   font-family: "Ancizar Serif", serif;
 }
 .nav-link {
-  color: #a9a9a9;
+  color: #a9a9a9 !important;
 }
 .active {
-  color: #fff;
+  color: #fff !important;
 }
 .px-6 {
   padding-left: 100px;
@@ -15,6 +15,20 @@
   background: #333333;
 }
 .banner-img {
-  height: 300px; /* 60% chiều cao cửa sổ trình duyệt */
+  height: 400px; /* 60% chiều cao cửa sổ trình duyệt */
   width: auto;
+}
+
+.badge {
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  border-radius: 0px;
+}
+
+.card {
+  flex: 1;
+  height: fit-content;
+  position: relative;
+  overflow: hidden;
 }
