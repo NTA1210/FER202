@@ -7,7 +7,7 @@ import menu4 from "./assets/menu4.jpg";
 function Menu() {
   return (
     <Container className="Menu px-5">
-      <div className="menu-title text-center text-white">
+      <div className="menu-title  text-white">
         <h1>Our Menu</h1>
       </div>
       <Row className="menu-items d-flex justify-content-center gap-2">
@@ -22,9 +22,7 @@ function Menu() {
               <p className="text-decoration-line-through">$40.00</p>
               <p className="text-warning">$24.00</p>
             </Card.Text>
-            <Button variant="danger" className="w-100">
-              Buy
-            </Button>
+            <Button className="w-100 bg-gray">Buy</Button>
           </Card.Body>
         </Card>
         {/*  */}
@@ -35,9 +33,7 @@ function Menu() {
             <Card.Text className="d-flex align-items-center">
               <p className="text-dark">$24.00</p>
             </Card.Text>
-            <Button variant="danger" className="w-100">
-              Buy
-            </Button>
+            <Button className="w-100 bg-gray">Buy</Button>
           </Card.Body>
         </Card>
         {/*  */}
@@ -51,9 +47,7 @@ function Menu() {
             <Card.Text className="d-flex align-items-center">
               <p className="text-dark">$25.00</p>
             </Card.Text>
-            <Button variant="danger" className="w-100">
-              Buy
-            </Button>
+            <Button className="w-100 bg-gray">Buy</Button>
           </Card.Body>
         </Card>
         {/*  */}
@@ -68,9 +62,7 @@ function Menu() {
               <p className="text-decoration-line-through">$40.00</p>
               <p className="text-warning">$30.00</p>
             </Card.Text>
-            <Button variant="danger" className="w-100">
-              Buy
-            </Button>
+            <Button className="w-100 bg-gray">Buy</Button>
           </Card.Body>
         </Card>
       </Row>

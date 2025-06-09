@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Carousel, Container } from "react-bootstrap";
-import pizza1 from "./assets/pizza1.jpg"; // Đảm bảo bạn có ảnh
-import pizza2 from "./assets/pizza2.jpg"; // Đảm bảo bạn có ảnh
-import pizza3 from "./assets/pizza3.jpg"; // Đảm bảo bạn có ảnh
-import pizza4 from "./assets/pizza4.jpg"; // Đảm bảo bạn có ảnh
-import pizza5 from "./assets/pizza5.jpg"; // Đảm bảo bạn có ảnh
+import pizza1 from "./assets/pizza1.jpg";
+import pizza2 from "./assets/pizza2.jpg";
+import pizza3 from "./assets/pizza3.jpg";
+import pizza4 from "./assets/pizza4.jpg";
+import pizza5 from "./assets/pizza5.jpg";
 
-// Tạo một component tùy chỉnh để hiển thị ảnh trong carousel
 function ExampleCarouselImage({ src, alt, text }) {
   return <img src={src} alt={alt} className="d-block w-100 banner-img" />;
 }

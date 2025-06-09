@@ -12,7 +12,8 @@
   padding-right: 100px;
 }
 .bg-gray {
-  background: #333333;
+  background: #333333 !important;
+  border: none !important;
 }
 .banner-img {
   height: 400px; /* 60% chiều cao cửa sổ trình duyệt */
