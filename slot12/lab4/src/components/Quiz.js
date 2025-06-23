@@ -1,50 +1,55 @@
-import React, { useState } from "react";
-import { useQuiz } from "../context/QuizContext";
-import QuestionCard from "./QuestionCard";
-import "./Quiz.css";
-import { quizData } from "../Quiz"; // chứa dữ liệu câu hỏi
+// src/components/Quiz.js
+import React, { useContext } from "react";
+import { QuizContext } from "../context/QuizContext";
 
 function Quiz() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selected, setSelected] = useState("");
-  const [showResult, setShowResult] = useState(false);
-  const { score, setScore } = useQuiz();
+  const {
+    quizData,
+    currentQuestion,
+    selectedAnswer,
+    handleAnswer,
+    showScore,
+    score,
+    handleNextQuestion,
+    resetQuiz,
+  } = useContext(QuizContext);
 
-  const handleNext = () => {
-    if (selected === quizData[currentQuestion].correctAnswer) {
-      setScore(score + 1);
-    }
+  if (quizData.length === 0) return <p>No questions available.</p>;
 
-    setSelected("");
-
-    if (currentQuestion + 1 < quizData.length) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowResult(true);
-    }
-  };
-
-  if (showResult) {
-    return (
-      <div className="result">
-        <h1>Quiz Completed!</h1>
-        <p>Your score: {score}</p>
-      </div>
-    );
-  }
+  const q = quizData[currentQuestion];
 
   return (
-    <div className="quiz-container">
-      <h2>Question {currentQuestion + 1}</h2>
-      <QuestionCard
-        question={quizData[currentQuestion].question}
-        answers={quizData[currentQuestion].answers}
-        selected={selected}
-        setSelected={setSelected}
-      />
-      <button className="next-btn" onClick={handleNext} disabled={!selected}>
-        Next
-      </button>
+    <div>
+      {showScore ? (
+        <div style={{ fontSize: "2rem", color: "red" }}>
+          Quiz Completed!
+          <br />
+          Your score: {score}/{quizData.length}
+          <br />
+          <button onClick={resetQuiz}>Reset Quiz</button> {/* Nút Reset */}
+        </div>
+      ) : (
+        <div>
+          <h2>Question {currentQuestion + 1}</h2>
+          <p>{q.question}</p>
+          {q.answers.map((ans, idx) => (
+            <div key={idx}>
+              <label>
+                <input
+                  type="radio"
+                  name="answer"
+                  value={ans}
+                  checked={selectedAnswer === ans}
+                  onChange={() => handleAnswer(ans)}
+                />
+                {ans}
+              </label>
+            </div>
+          ))}
+          <button onClick={handleNextQuestion}>Next</button>{" "}
+          {/* để giống giao diện */}
+        </div>
+      )}
     </div>
   );
 }
