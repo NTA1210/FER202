@@ -1,4 +1,4 @@
-export const quizData = [
+export const initialQuizData = [
   {
     question: "What is ReactJS?",
     answers: [
