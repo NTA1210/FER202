@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { QuizContext } from "../context/QuizContext";
 
 function AddQuestion() {
-  const { addQuestion } = useContext(QuizContext);
+  const { addQuestion, handleBackQuestion } = useContext(QuizContext);
   const [question, setQuestion] = useState("");
   const [answers, setAnswers] = useState(["", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -80,6 +80,7 @@ function AddQuestion() {
         onChange={(e) => setCorrectAnswer(e.target.value)}
       />
       <button onClick={handleSubmit}>Add</button>
+      <button onClick={handleBackQuestion}>Back to question</button>
     </div>
   );
 }
