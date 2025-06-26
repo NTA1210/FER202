@@ -1,6 +1,7 @@
 // src/components/Quiz.js
 import React, { useContext } from "react";
 import { QuizContext } from "../context/QuizContext";
+import AddQuestion from "./AddQuestion";
 
 function Quiz() {
   const {
@@ -12,9 +13,15 @@ function Quiz() {
     score,
     handleNextQuestion,
     resetQuiz,
+    showAddQuestion,
+    handleShowAddQuestion,
   } = useContext(QuizContext);
 
   if (quizData.length === 0) return <p>No questions available.</p>;
+
+  if (showAddQuestion) {
+    return <AddQuestion />;
+  }
 
   const q = quizData[currentQuestion];
 
@@ -47,6 +54,7 @@ function Quiz() {
             </div>
           ))}
           <button onClick={handleNextQuestion}>Next</button>{" "}
+          <button onClick={handleShowAddQuestion}>Add Question</button>{" "}
           {/* để giống giao diện */}
         </div>
       )}

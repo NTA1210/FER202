@@ -9,8 +9,6 @@ function App() {
     <QuizProvider>
       <div className="container">
         <Quiz />
-        <hr />
-        <AddQuestion />
       </div>
     </QuizProvider>
   );

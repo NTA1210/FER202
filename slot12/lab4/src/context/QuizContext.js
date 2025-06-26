@@ -10,14 +10,18 @@ export const QuizProvider = ({ children }) => {
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showScore, setShowScore] = useState(false);
+  const [showAddQuestion, setShowAddQuestion] = useState(false);
 
   const handleAnswer = (answer) => {
     setSelectedAnswer(answer);
   };
 
   const handleNextQuestion = () => {
+    console.log(quizData[currentQuestion]);
+    console.log(" selectedAnswer:" + selectedAnswer);
+
     const next = currentQuestion + 1;
-    if (next < quizData.length) {
+    if (next <= quizData.length) {
       if (selectedAnswer === quizData[currentQuestion].correctAnswer) {
         setScore((prev) => prev + 1);
       }
@@ -40,6 +44,17 @@ export const QuizProvider = ({ children }) => {
     setQuizData([...quizData, newQ]);
   };
 
+  const handleBackQuestion = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setSelectedAnswer("");
+    setShowScore(false);
+    setShowAddQuestion(false);
+  };
+  const handleShowAddQuestion = () => {
+    setShowAddQuestion(true);
+  };
+
   return (
     <QuizContext.Provider
       value={{
@@ -48,10 +63,13 @@ export const QuizProvider = ({ children }) => {
         score,
         selectedAnswer,
         showScore,
+        showAddQuestion,
         handleAnswer,
         handleNextQuestion,
         resetQuiz,
         addQuestion,
+        handleBackQuestion,
+        handleShowAddQuestion,
       }}
     >
       {children}
