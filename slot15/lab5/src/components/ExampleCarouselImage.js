@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function ExampleCarouselImage({ src, alt }) {
   return (
     <img
@@ -8,4 +10,10 @@ function ExampleCarouselImage({ src, alt }) {
     />
   );
 }
+
+ExampleCarouselImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+};
+
 export default ExampleCarouselImage;

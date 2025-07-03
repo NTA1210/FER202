@@ -1,26 +1,26 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavbarCustom() {
   return (
     <Navbar bg="light" data-bs-theme="light">
       <Container className="mx-2">
         <Nav className="me-auto">
-          <Nav.Link as={NavLink} to="/" end>
+          <Nav.Link as={Link} to="/" end>
             Home
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/about">
+          <Nav.Link as={Link} to="/about">
             About
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/news">
+          <Nav.Link as={Link} to="/news">
             News
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/quizzes">
+          <Nav.Link as={Link} to="/quizzes">
             Quiz
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/contact">
+          <Nav.Link as={Link} to="/contact">
             Contact
           </Nav.Link>
         </Nav>

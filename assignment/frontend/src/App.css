@@ -1,0 +1,17 @@
+.text-gradient {
+  background: linear-gradient(
+    to right,
+    #3b82f6,
+    #4f46e5
+  ); /* from-blue-500 to-indigo-600 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient {
+  background: linear-gradient(
+    to right,
+    #3b82f6,
+    #4f46e5
+  ); /* from-blue-500 to-indigo-600 */
+}
