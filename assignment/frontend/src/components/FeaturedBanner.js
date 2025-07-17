@@ -1,11 +1,9 @@
 import React from "react";
 import { Card, Badge, Image, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getCategoryById } from "../utils/mockData";
 
 const FeaturedBanner = ({ article }) => {
-  const category = getCategoryById(article.categoryId);
-  const formattedDate = new Date(article.pubDate).toLocaleDateString("en-US", {
+  const formattedDate = new Date(article?.pubDate).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
@@ -15,8 +13,8 @@ const FeaturedBanner = ({ article }) => {
     <div className="position-relative mb-5 rounded-4 overflow-hidden shadow">
       {/* Background image */}
       <img
-        src={article.image_url}
-        alt={article.title}
+        src={article?.imageURL}
+        alt={article?.title}
         className="w-100"
         style={{
           height: "500px",
@@ -42,12 +40,15 @@ const FeaturedBanner = ({ article }) => {
       >
         <div className="d-flex align-items-center mb-3">
           <Badge bg="primary" className="me-3">
-            {category?.name}
+            {article?.category}
           </Badge>
           <small className="text-light opacity-75">{formattedDate}</small>
         </div>
 
-        <Link to={`/article/${article.id}`} style={{ textDecoration: "none" }}>
+        <Link
+          to={`/article/${article.article_id}`}
+          style={{ textDecoration: "none" }}
+        >
           <h2 className="display-5 fw-bold text-white mb-3">{article.title}</h2>
         </Link>
 
@@ -59,16 +60,7 @@ const FeaturedBanner = ({ article }) => {
         </p>
 
         <div className="d-flex align-items-center">
-          <Image
-            src={article.authorAvatar}
-            alt={article.authorName}
-            roundedCircle
-            width={40}
-            height={40}
-            className="me-3 border border-white"
-            style={{ objectFit: "cover" }}
-          />
-          <span className="fw-medium">{article.authorName}</span>
+          <span className="fw-medium">By: {article.creator}</span>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const httpRequest = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "https://newsdata.io/api/1/latest",
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:3011/api/news",
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,7 +13,6 @@ export const get = async (url, params = {}, options = {}) => {
   try {
     const response = await httpRequest.get(url, {
       params: {
-        apikey: process.env.REACT_APP_API_KEY,
         ...params,
       },
       ...options,
@@ -29,9 +28,7 @@ export const get = async (url, params = {}, options = {}) => {
 export const post = async (url, data = {}, options = {}) => {
   try {
     const response = await httpRequest.post(url, data, {
-      params: {
-        apikey: process.env.REACT_APP_API_KEY,
-      },
+      params: {},
       ...options,
     });
     return response.data;
@@ -45,9 +42,7 @@ export const post = async (url, data = {}, options = {}) => {
 export const put = async (url, data = {}, options = {}) => {
   try {
     const response = await httpRequest.put(url, data, {
-      params: {
-        apikey: process.env.REACT_APP_API_KEY,
-      },
+      params: {},
       ...options,
     });
     return response.data;
@@ -61,9 +56,6 @@ export const put = async (url, data = {}, options = {}) => {
 export const del = async (url, options = {}) => {
   try {
     const response = await httpRequest.delete(url, {
-      params: {
-        apikey: process.env.REACT_APP_API_KEY,
-      },
       ...options,
     });
     return response.data;

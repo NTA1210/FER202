@@ -5,7 +5,7 @@ function Test() {
     const fetchNews = async () => {
       try {
         const response = await newsService.getNews();
-        console.log(response);
+        console.log(response[0]);
       } catch (error) {
         console.error(error);
       }

@@ -1,35 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navbar,
   Nav,
   Container,
-  NavDropdown,
+  Dropdown,
   Form,
   FormControl,
   Button,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
-import { categories } from "../utils/mockData";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Search, Menu, X } from "lucide-react";
+
+import newsService from "../services/newsService";
 
 const Navigation = () => {
   const [expanded, setExpanded] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const handleSearch = (e) => {
+  // Fetch danh mục từ BE
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await newsService.getAllCategories();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Cập nhật giá trị input từ URL nếu có
+  useEffect(() => {
+    const currentQ = searchParams.get("q") || "";
+    setSearchText(currentQ);
+  }, [searchParams]);
+
+  // Submit tìm kiếm
+  const handleSubmitSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-      setSearchQuery("");
-      setExpanded(false);
-    }
+
+    const form = e.currentTarget;
+    const input = form.elements.q;
+    const queryValue = input.value.trim();
+
+    const query = new URLSearchParams(searchParams);
+    query.set("q", queryValue);
+
+    navigate(`/search?${query.toString()}`);
+    setExpanded(false);
+  };
+
+  // Chọn category từ dropdown
+  const handleCategoryClick = (category) => {
+    const query = new URLSearchParams(searchParams);
+    console.log(query.toString());
+
+    query.set("category", category);
+    query.set("page", 1); // reset về trang đầu tiên
+    navigate(`/search?${query.toString()}`);
+    setExpanded(false);
   };
 
   return (
-    <Navbar expand="md" className="py-2 shadow bg-white">
+    <Navbar expand="md" className="py-2 shadow bg-white" expanded={expanded}>
       <Container className="d-flex justify-content-between align-items-center">
-        {/* Logo trái */}
+        {/* Logo */}
         <Navbar.Brand as={Link} to="/" className="fw-bold fs-4 text-gradient">
           NewsHub
         </Navbar.Brand>
@@ -42,22 +81,36 @@ const Navigation = () => {
           {expanded ? <X size={24} /> : <Menu size={24} />}
         </Navbar.Toggle>
 
-        {/* Nav + Search */}
         <Navbar.Collapse
           id="main-navbar"
           className="d-md-flex justify-content-end align-items-center"
         >
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
+          {/* Dropdown category */}
+          <Dropdown title="Category" id="basic-nav-dropdown">
+            <Dropdown.Toggle variant="text" id="dropdown-basic">
+              Category
+            </Dropdown.Toggle>
+            <Dropdown.Menu style={{ maxHeight: "300px", overflowY: "auto" }}>
+              <Dropdown.Item
+                key={categories.length}
+                onClick={() => handleCategoryClick("")}
+                style={{ textTransform: "capitalize" }}
+              >
+                All Categories
+              </Dropdown.Item>
+              {categories.map((category, index) => (
+                <Dropdown.Item
+                  key={index}
+                  onClick={() => handleCategoryClick(category)}
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {category}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* Nav links */}
           <Nav className="me-3 d-flex align-items-md-center">
             <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
               Latest
@@ -67,15 +120,15 @@ const Navigation = () => {
             </Nav.Link>
           </Nav>
 
-          {/* Search Bar */}
-          <Form className="d-flex" onSubmit={handleSearch}>
+          {/* Search bar */}
+          <Form className="d-flex" onSubmit={handleSubmitSearch}>
             <div className="position-relative">
               <FormControl
                 type="search"
                 placeholder="Search articles..."
                 className="py-2 px-5 rounded-pill"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                name="q"
+                defaultValue={searchParams.get("q") || ""}
               />
               <Search
                 size={18}
