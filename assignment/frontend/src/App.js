@@ -9,6 +9,7 @@ import AdminPage from "./pages/AdminPage";
 import SearchPage from "./pages/SearchPage";
 import CreateArticlePage from "./pages/CreateArticlePage";
 import EditArticlePage from "./pages/EditArticlePage";
+import Test from "./components/Test";
 
 import "./App.css";
 
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/admin/create" element={<CreateArticlePage />} />
             <Route path="/admin/edit/:id" element={<EditArticlePage />} />
             <Route path="/search" element={<SearchPage />} />
+            <Route path="/test" element={<Test />} />
           </Routes>
         </Container>
         <Toaster position="top-right" />

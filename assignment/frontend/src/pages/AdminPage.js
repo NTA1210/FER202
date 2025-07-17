@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Table,
@@ -8,33 +8,104 @@ import {
   Row,
   Col,
   InputGroup,
-  Badge,
+  NavDropdown,
+  Dropdown,
 } from "react-bootstrap";
 import { Search } from "lucide-react";
 import AdminTableRow from "../components/AdminTableRow";
-import { articles as mockArticles, categories } from "../utils/mockData";
+import { useSelector, useDispatch } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import { searchArticles } from "../actions/newsActions";
+import newsService from "../services/newsService";
+
+const sortOptions = [
+  { value: "newest", label: "Latest" },
+  { value: "oldest", label: "Oldest" },
+];
 
 const AdminPage = () => {
-  const [articles, setArticles] = useState(mockArticles);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [sortOrder, setSortOrder] = useState("latest");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Get query params
+  const q = searchParams.get("q") || "";
+  const category = searchParams.get("category") || "";
+  const page = parseInt(searchParams.get("page")) || 1;
+  const sort = searchParams.get("sort") || "";
+
+  // Local states
+  const [searchTerm, setSearchTerm] = useState(q);
+  const [categories, setCategories] = useState([]);
   const [articleToDelete, setArticleToDelete] = useState(null);
 
-  const filteredArticles = articles
-    .filter((a) => a.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    .filter((a) =>
-      selectedCategory === "all" ? true : a.categoryId === selectedCategory
-    )
-    .sort((a, b) => {
-      if (sortOrder === "latest")
-        return new Date(b.publishDate) - new Date(a.publishDate);
-      else return new Date(a.publishDate) - new Date(b.publishDate);
-    });
+  const { news, loading, error, pagination } = useSelector(
+    (state) => state.news
+  );
+  const dispatch = useDispatch();
+
+  // Fetch articles mỗi khi filter/search thay đổi
+  useEffect(() => {
+    dispatch(searchArticles({ q, category, page, sort }));
+    setSearchTerm(q); // đồng bộ input khi query thay đổi từ bên ngoài
+  }, [q, category, page, sort, dispatch]);
+
+  // Fetch categories
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await newsService.getAllCategories();
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Tìm kiếm bài viết
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    const query = new URLSearchParams(searchParams);
+
+    if (searchTerm.trim()) {
+      query.set("q", searchTerm.trim());
+    } else {
+      query.delete("q");
+    }
+    query.set("page", 1);
+    setSearchParams(query);
+  };
+
+  // Chọn category từ dropdown
+  const handleCategoryClick = (category) => {
+    const query = new URLSearchParams(searchParams);
+    if (category) {
+      query.set("category", category);
+    } else {
+      query.delete("category");
+    }
+    query.set("page", 1);
+    setSearchParams(query);
+  };
+
+  // Chọn sắp xếp
+  const handleChangeSort = (newSort) => {
+    const query = new URLSearchParams(searchParams);
+    query.set("sort", newSort);
+    query.set("page", 1);
+    setSearchParams(query);
+  };
+
+  // Chuyển trang
+  const handleChangePage = (newPage) => {
+    const query = new URLSearchParams(searchParams);
+    query.set("page", newPage);
+    setSearchParams(query);
+  };
 
   const handleDelete = () => {
-    setArticles((prev) => prev.filter((a) => a.id !== articleToDelete.id));
-    setArticleToDelete(null);
+    // Logic xóa bài viết ở đây nếu cần
   };
 
   return (
@@ -43,68 +114,122 @@ const AdminPage = () => {
 
       {/* Filter Bar */}
       <Row className="align-items-center mb-4">
-        <Col md={4} className="mb-2">
-          <InputGroup>
-            <InputGroup.Text>
-              <Search size={16} />
-            </InputGroup.Text>
-            <Form.Control
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </InputGroup>
+        <Col md={6} className="mb-2">
+          <Form onSubmit={handleSubmitSearch}>
+            <InputGroup>
+              <InputGroup.Text>
+                <Search size={16} />
+              </InputGroup.Text>
+              <Form.Control
+                placeholder="Search articles..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <Button variant="primary" type="submit">
+                Search
+              </Button>
+            </InputGroup>
+          </Form>
         </Col>
 
         <Col md={4} className="mb-2">
-          <Form.Select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+          <Dropdown
+            title="Category"
+            className="w-100 border rounded"
+            style={{ height: "38px" }}
+            align={{ sm: "end" }}
           >
-            <option value="all">All Categories</option>
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
+            <Dropdown.Toggle
+              variant="text"
+              id="dropdown-basic"
+              className="w-100 bg-white text-start"
+            >
+              {category ? category : "All Categories"}
+            </Dropdown.Toggle>
+            <Dropdown.Menu
+              style={{ maxHeight: "300px", width: "100%", overflowY: "auto" }}
+            >
+              <Dropdown.Item onClick={() => handleCategoryClick("")}>
+                All Categories
+              </Dropdown.Item>
+              {categories.map((cat, idx) => (
+                <Dropdown.Item
+                  key={idx}
+                  onClick={() => handleCategoryClick(cat)}
+                  style={{ textTransform: "capitalize" }}
+                >
+                  {cat}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </Col>
+
+        <Col md={2} className="mb-2">
+          <NavDropdown
+            title={`Sort ${sort ? "by: " + sort : ""}`}
+            className="border border-1 w-auto p-2 align-self-end rounded fw-semibold d-flex justify-content-start align-items-center bg-white"
+            style={{ height: "38px" }}
+            align={{ sm: "end" }}
+          >
+            {sortOptions.map((option) => (
+              <NavDropdown.Item
+                key={option.value}
+                onClick={() => handleChangeSort(option.value)}
+              >
+                {option.label}
+              </NavDropdown.Item>
             ))}
-          </Form.Select>
-        </Col>
-
-        <Col md={4} className="mb-2">
-          <Form.Select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="latest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-          </Form.Select>
+          </NavDropdown>
         </Col>
       </Row>
 
-      {/* Articles Table */}
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredArticles.map((article) => (
-            <AdminTableRow
-              key={article.id}
-              article={article}
-              onDelete={setArticleToDelete}
-            />
-          ))}
-        </tbody>
-      </Table>
+      {/* Table */}
+      {loading ? (
+        <LoadingSpinner message="Đang tải dữ liệu..." />
+      ) : (
+        <>
+          <Table striped bordered hover responsive>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {news.map((article) => (
+                <AdminTableRow
+                  key={article.article_id}
+                  article={article}
+                  onDelete={() => setArticleToDelete(article)}
+                />
+              ))}
+            </tbody>
+          </Table>
 
-      {/* Delete Confirmation Modal */}
+          {/* Pagination đơn giản */}
+          <div className="d-flex justify-content-center mt-4">
+            {Array.from({ length: pagination.totalPages || 1 }, (_, index) => (
+              <Button
+                key={index + 1}
+                className="mx-1"
+                variant={
+                  pagination.page === index + 1 ? "primary" : "outline-primary"
+                }
+                onClick={() => handleChangePage(index + 1)}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+        </>
+      )}
+
+      {/* Modal xác nhận xóa */}
       <Modal
         show={!!articleToDelete}
         onHide={() => setArticleToDelete(null)}

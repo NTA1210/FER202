@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+}
+
+.card {
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.laptop-image {
+  height: 200px;
+  object-fit: cover;
+}
+
+.search-container {
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .btn {
+    font-size: 0.9rem;
+  }
+}

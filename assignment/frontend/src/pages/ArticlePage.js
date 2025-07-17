@@ -9,7 +9,6 @@ import {
   Badge,
   Form,
   Card,
-  Spinner,
 } from "react-bootstrap";
 import {
   FacebookIcon,
@@ -20,17 +19,13 @@ import {
   ThumbsUpIcon,
 } from "lucide-react";
 import ArticleCard from "../components/ArticleCard";
-import {
-  getArticleById,
-  getRelatedArticles,
-  getCategoryById,
-} from "../utils/mockData";
+import { useSelector, useDispatch } from "react-redux";
+
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
+import { fetchNewDetail } from "../actions/newsActions";
 
 const ArticlePage = () => {
-  const { id } = useParams();
-  const [article, setArticle] = useState(null);
   const [relatedArticles, setRelatedArticles] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([
     {
@@ -54,18 +49,21 @@ const ArticlePage = () => {
       likes: 2,
     },
   ]);
+  const { id } = useParams();
+  const { news, loading, error, newDetail } = useSelector(
+    (state) => state.news
+  );
+  const dispatch = useDispatch();
+
+  const currentNew =
+    news.find((item) => String(item.article_id) === id) ||
+    (String(newDetail?.article_id) === id ? newDetail : null);
 
   useEffect(() => {
-    if (id) {
-      setIsLoading(true);
-      setTimeout(() => {
-        const fetchedArticle = getArticleById(Number(id));
-        setArticle(fetchedArticle);
-        setRelatedArticles(getRelatedArticles(Number(id)));
-        setIsLoading(false);
-      }, 500);
+    if (!currentNew) {
+      dispatch(fetchNewDetail(id));
     }
-  }, [id]);
+  }, [id, dispatch, currentNew]);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -84,15 +82,11 @@ const ArticlePage = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <Container className="py-5 text-center">
-        <Spinner animation="border" variant="primary" />
-      </Container>
-    );
+  if (loading) {
+    return <LoadingSpinner message="Đang tải bài viết..." />;
   }
 
-  if (!article) {
+  if (!currentNew) {
     return (
       <Container className="py-5 text-center">
         <h2>Article not found</h2>
@@ -104,58 +98,52 @@ const ArticlePage = () => {
     );
   }
 
-  const category = getCategoryById(article.categoryId);
-  const formattedDate = new Date(article.publishDate).toLocaleDateString(
-    "en-US",
-    {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }
-  );
+  const formattedDate = currentNew?.pubDate
+    ? new Date(currentNew.pubDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "";
 
   return (
     <Container className="py-5">
       <Row className="mb-4">
         <Col>
           <div className="position-relative">
-            <Image
-              src={article.image}
-              alt={article.title}
-              fluid
-              className="rounded"
+            <img
+              src={currentNew?.imageURL}
+              alt={currentNew?.title}
+              className="w-100"
+              style={{
+                height: "500px",
+                objectFit: "cover",
+                transition: "transform 0.5s",
+              }}
             />
             <div className="position-absolute bottom-0 start-0 p-4 text-white bg-dark bg-opacity-50 w-100">
               <div className="mb-2">
                 <Badge bg="primary" className="me-2">
-                  {category?.name}
+                  {currentNew.category[0]}
                 </Badge>
                 <small>{formattedDate}</small>
               </div>
-              <h1>{article.title}</h1>
+              <h1>{currentNew.title}</h1>
             </div>
           </div>
         </Col>
       </Row>
 
       <Row className="mb-4">
-        <Col md="auto">
-          <Image
-            src={article.authorAvatar}
-            roundedCircle
-            width={60}
-            height={60}
-          />
-        </Col>
         <Col>
-          <h5>{article.authorName}</h5>
+          <h5>{currentNew.creator}</h5>
           <small className="text-muted">Published on {formattedDate}</small>
         </Col>
       </Row>
 
       <Row className="mb-4">
         <Col>
-          <div dangerouslySetInnerHTML={{ __html: article.content }} />
+          <div dangerouslySetInnerHTML={{ __html: currentNew.content }} />
         </Col>
       </Row>
 
