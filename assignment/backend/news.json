@@ -1,127 +1,6 @@
 {
   "news": [
     {
-      "article_id": "fc8bec0166791a21441b6946d32f3b00",
-      "title": "Swat Tragedy and Safety Measures",
-      "link": "https://jang.com.pk/news/1487813",
-      "description": "The atmosphere in my city, Sialkot, is mournful due to the loss of lives in the Swat tragedy. Every citizen is grieving, and every face appears somber. From Daska to...",
-      "content": "Following the Swat tragedy, Sialkot is engulfed in sorrow. Citizens have emphasized the need for enhanced safety measures to prevent such incidents in the future.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487803_035107_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Ahmed Khan"
-    },
-    {
-      "article_id": "96e5331deb77e9e3684539175b661c80",
-      "title": "Device Developed to Detect Slight Movements of Humans Trapped Under Debris",
-      "link": "https://jang.com.pk/news/1487843",
-      "description": "NASA in Washington has developed a device using advanced technology that can detect even the slightest movement of a human body trapped under debris. This...",
-      "content": "NASA's new device is a revolutionary step in rescuing individuals trapped under debris. This technology will not only speed up rescue operations but also prove instrumental in saving lives.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487837_062438_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Fatima Zahra"
-    },
-    {
-      "article_id": "e4614bce4cef53edef0157ebf2779af8",
-      "title": "Words of Patience and Contentment",
-      "link": "https://jang.com.pk/news/1487816",
-      "description": "Karbala, Karbala, Hussain, Hussain, the call of life, Hussain, Hussain, a drop of light descended on the sword, and it was proclaimed Hussain, Hussain. The pages of oppression flutter, words of patience and...",
-      "content": "This article sheds light on the events of Karbala and highlights the message of patience and contentment. Imam Hussain's sacrifice remains a profound lesson for humanity today.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487803_035107_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Mohammad Ali"
-    },
-    {
-      "article_id": "f413a0d105f488c746eae94bfcf28d36",
-      "title": "Shehbaz-Nisar Meeting: The Inside Story",
-      "link": "https://jang.com.pk/news/1487811",
-      "description": "After Prime Minister Shehbaz Sharif's meeting with former Interior Minister Chaudhry Nisar Ali Khan, Chaudhry Nisar is once again in the spotlight of rumors...",
-      "content": "The meeting between Shehbaz Sharif and Chaudhry Nisar has sparked a new debate in political circles. Sources suggest this meeting was an effort to strengthen political alliances.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487803_035107_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Ayesha Siddiqui"
-    },
-
-    {
-      "article_id": "33b565fe4046e590afebb2fccd612d3a",
-      "title": "Ten-Day Religious Gatherings at Shah Karbala Rizvia Imam Bargah",
-      "link": "https://jang.com.pk/news/1487781",
-      "description": "Karachi: Syed Waqar Zaidi and Aal Javed Zaidi are organizing gatherings in memory of Hussain from the 12th to the 20th of Muharram, daily at 9:30 PM at Shah Karbala Rizvia Imam Bargah Society...",
-      "content": "The religious gatherings at Shah Karbala Rizvia Imam Bargah will commemorate the sacrifices of Imam Hussain, drawing large crowds to reflect on his legacy during the sacred month of Muharram.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487774_015451_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Zainab Raza"
-    },
-    {
-      "article_id": "0d6b30b458fc542234fd9c2bc4fba2b6",
-      "title": "Facing Numerous Challenges, Nation Must Embrace Tolerance, Sacrifice, and Integrity, Say President and PM",
-      "link": "https://jang.com.pk/news/1487821",
-      "description": "Islamabad: President Asif Zardari and Prime Minister Shehbaz Sharif stated that the nation faces numerous challenges, and tolerance, sacrifice, and integrity must be integrated into national life...",
-      "content": "President Zardari and PM Sharif urged the nation to adopt values of tolerance and sacrifice to overcome challenges, emphasizing the importance of principled living for Pakistan's progress.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/1487821_9711035_6_akhbar.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Bilal Ahmed"
-    },
-    {
-      "article_id": "2edac185a0cccec4f3fcec6e284ddf0f",
-      "title": "July 5, 1977: A Dark Day in History, Attack on Democracy Not Forgotten, Says Habib Junedi",
-      "link": "https://jang.com.pk/news/1487779",
-      "description": "Karachi: Habibuddin Junedi, President of the People's Labour Bureau Sindh, along with Karachi President Aslam Samoon and General Secretary Hussain Badshah, said that the attack on democracy...",
-      "content": "Habib Junedi and other leaders condemned the 1977 attack on democracy, calling it a dark chapter in Pakistan's history and urging citizens to safeguard democratic values.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487774_015451_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Sana Iqbal"
-    },
-    {
-      "article_id": "3edd078e7550d6f8963d897f38ed4b32",
-      "title": "Hamas' Positive Response to Ceasefire Agreement is Welcome, Says Trump",
-      "link": "https://jang.com.pk/news/1487846",
-      "description": "Karachi: Hamas has stated that it has submitted a positive response to mediator countries regarding the proposed ceasefire agreement in Gaza, expressing readiness for a 60-day current ceasefire...",
-      "content": "Hamas' positive stance on the Gaza ceasefire has been welcomed by international leaders, including Trump, signaling hope for de-escalation in the region.",
-      "pubDate": "2025-07-05 19:07:00",
-      "pubTZ": "UTC",
-      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487837_062438_updates.jpg",
-      "videoURL": null,
-      "language": "english",
-      "country": ["pakistan"],
-      "category": ["top"],
-      "creator": "Omar Farooq"
-    },
-    {
       "article_id": "2c417d957ab2e915de67019a1d4c2908",
       "title": "Providing Alternative Shelter to Lyari Victims is Government's Duty, Says Ali Khursheedi",
       "link": "https://jang.com.pk/news/1487860",
@@ -134,7 +13,8 @@
       "language": "english",
       "country": ["pakistan"],
       "category": ["top"],
-      "creator": "Hina Malik"
+      "creator": "Hina Malik",
+      "status": true
     },
     {
       "article_id": "00bdb22139837e398fa5436b268e27d4",
@@ -149,9 +29,9 @@
       "language": "english",
       "country": ["guyana"],
       "category": ["business"],
-      "creator": "James Carter"
+      "creator": "James Carter",
+      "status": true
     },
-
     {
       "article_id": "4ce60918e36dac93216506754ce75195",
       "title": "Operation Against CHP Municipalities! Zeydan Karalar and Abdurrahman Tutdere Detained... Antalya Mayor Muhittin Böcek Arrested!",
@@ -165,7 +45,8 @@
       "language": "english",
       "country": ["turkey"],
       "category": ["business"],
-      "creator": "Ahmet Yılmaz"
+      "creator": "Ahmet Yılmaz",
+      "status": true
     },
     {
       "article_id": "fce8b47f60630dc64ff14096e3e5b03a",
@@ -180,7 +61,8 @@
       "language": "english",
       "country": ["serbia"],
       "category": ["business"],
-      "creator": "Milena Petrović"
+      "creator": "Milena Petrović",
+      "status": true
     },
     {
       "article_id": "2a98178e3367203a7a812485433369f2",
@@ -195,9 +77,9 @@
       "language": "english",
       "country": ["india"],
       "category": ["business"],
-      "creator": "Rahul Sharma"
+      "creator": "Rahul Sharma",
+      "status": true
     },
-
     {
       "article_id": "4b4799e386aeeecc5ffa55742186c2a9",
       "title": "Solar Energy Subsidies to Rise to 1.4 Billion Francs Annually by 2035",
@@ -211,7 +93,8 @@
       "language": "english",
       "country": ["switzerland"],
       "category": ["business"],
-      "creator": "Lukas Müller"
+      "creator": "Lukas Müller",
+      "status": true
     },
     {
       "article_id": "c4336c480ff47d508541ee447eae2d33",
@@ -226,7 +109,8 @@
       "language": "english",
       "country": ["switzerland"],
       "category": ["business"],
-      "creator": "Anna Schmidt"
+      "creator": "Anna Schmidt",
+      "status": true
     },
     {
       "article_id": "b1f4e1048a18d5bc07cd003cb882088e",
@@ -241,7 +125,8 @@
       "language": "english",
       "country": ["turkey"],
       "category": ["politics", "crime"],
-      "creator": "Mehmet Aydın"
+      "creator": "Mehmet Aydın",
+      "status": true
     },
     {
       "article_id": "31337d6b28ae010015fa0df65e1f84cb",
@@ -265,7 +150,8 @@
         "jordan"
       ],
       "category": ["crime"],
-      "creator": "Khaled Mahmoud"
+      "creator": "Khaled Mahmoud",
+      "status": true
     },
     {
       "article_id": "a19a2c094dc2e546d44e7d0fd9dd2dee",
@@ -280,7 +166,8 @@
       "language": "english",
       "country": ["canada"],
       "category": ["crime"],
-      "creator": "Laura Thompson"
+      "creator": "Laura Thompson",
+      "status": true
     },
     {
       "article_id": "2ba4cb1606afe6951d1807f236554c43",
@@ -295,7 +182,8 @@
       "language": "english",
       "country": ["egypt"],
       "category": ["crime"],
-      "creator": "Amr Hassan"
+      "creator": "Amr Hassan",
+      "status": true
     },
     {
       "article_id": "3be0fe224111ef3c3d25b02ec498b0c1",
@@ -319,7 +207,8 @@
         "jordan"
       ],
       "category": ["crime"],
-      "creator": "Fatima Ali"
+      "creator": "Fatima Ali",
+      "status": true
     },
     {
       "article_id": "d84d86539aa09a16520fbdd9024914e5",
@@ -334,7 +223,8 @@
       "language": "english",
       "country": ["india"],
       "category": ["crime"],
-      "creator": "Priya Sharma"
+      "creator": "Priya Sharma",
+      "status": true
     },
     {
       "article_id": "69491f00745e69b43c941a60bc974cf2",
@@ -349,7 +239,8 @@
       "language": "english",
       "country": ["serbia"],
       "category": ["crime"],
-      "creator": "Nikola Jovanović"
+      "creator": "Nikola Jovanović",
+      "status": true
     },
     {
       "article_id": "b021daaff621ee6e716423a8c90c656c",
@@ -364,7 +255,8 @@
       "language": "english",
       "country": ["india"],
       "category": ["crime"],
-      "creator": "Suresh Reddy"
+      "creator": "Suresh Reddy",
+      "status": true
     },
     {
       "article_id": "5a1ef2c18c8b6d3cdc8493ec2d4921ce",
@@ -379,7 +271,8 @@
       "language": "english",
       "country": ["bolivia"],
       "category": ["crime"],
-      "creator": "Sofia Morales"
+      "creator": "Sofia Morales",
+      "status": true
     },
     {
       "article_id": "59ca9f55cd91ebc3018b9d54ba7f3b1c",
@@ -403,7 +296,8 @@
         "jordan"
       ],
       "category": ["crime"],
-      "creator": "Hassan Omar"
+      "creator": "Hassan Omar",
+      "status": true
     },
     {
       "article_id": "b679dfed04c60335087719ac2e8fe7e2",
@@ -418,7 +312,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["politics", "education"],
-      "creator": "G.G.G."
+      "creator": "G.G.G.",
+      "status": true
     },
     {
       "article_id": "79b53d3324998ab7df1b6444b120a77d",
@@ -433,7 +328,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["politics", "education"],
-      "creator": "Mireia Esteve"
+      "creator": "Mireia Esteve",
+      "status": true
     },
     {
       "article_id": "0018c446c0f8c908f762edcca2a37399",
@@ -461,7 +357,8 @@
         "tourism",
         "education"
       ],
-      "creator": "Sarah Johnson"
+      "creator": "Sarah Johnson",
+      "status": true
     },
     {
       "article_id": "c20f2cca01f1b3023655fea990bfcff5",
@@ -476,7 +373,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["education"],
-      "creator": "Adam Jude"
+      "creator": "Adam Jude",
+      "status": true
     },
     {
       "article_id": "6d32cb6664a73a4110616a366af30bc5",
@@ -491,7 +389,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["education"],
-      "creator": "Jay Cohen"
+      "creator": "Jay Cohen",
+      "status": true
     },
     {
       "article_id": "95e592bd0ba92a002eb0f56ebaaa1bba",
@@ -506,7 +405,8 @@
       "language": "english",
       "country": ["greece"],
       "category": ["education"],
-      "creator": "Dimitris Papadopoulos"
+      "creator": "Dimitris Papadopoulos",
+      "status": true
     },
     {
       "article_id": "e5a14ca19a2fcd934198c8e9bb6ea753",
@@ -521,7 +421,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["politics", "education"],
-      "creator": "Andrea Zamorano"
+      "creator": "Andrea Zamorano",
+      "status": true
     },
     {
       "article_id": "f98ae8b32ade9d2b6ee9526b70720ad9",
@@ -536,7 +437,8 @@
       "language": "english",
       "country": ["greece"],
       "category": ["education"],
-      "creator": "Nikos Georgiou"
+      "creator": "Nikos Georgiou",
+      "status": true
     },
     {
       "article_id": "6fcf3c54456c980768fdabbb921654c7",
@@ -551,7 +453,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["politics", "education"],
-      "creator": "David Miró"
+      "creator": "David Miró",
+      "status": true
     },
     {
       "article_id": "9b7934979567b72f0f3c4ae9908651cf",
@@ -566,7 +469,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["politics", "education"],
-      "creator": "Jordi Pons"
+      "creator": "Jordi Pons",
+      "status": true
     },
     {
       "article_id": "88308210a79cd6c4f366479242022aab",
@@ -581,7 +485,8 @@
       "language": "english",
       "country": ["croatia"],
       "category": ["entertainment"],
-      "creator": "Ivana Petrović"
+      "creator": "Ivana Petrović",
+      "status": true
     },
     {
       "article_id": "7310b9ebf74dc91b3df48f72ab9df296",
@@ -596,7 +501,8 @@
       "language": "english",
       "country": ["germany"],
       "category": ["entertainment"],
-      "creator": "Bernard Bernard"
+      "creator": "Bernard Bernard",
+      "status": true
     },
     {
       "article_id": "f089574dd88ad5f39ee359a0a7a1c2bd",
@@ -611,7 +517,8 @@
       "language": "english",
       "country": ["france"],
       "category": ["entertainment"],
-      "creator": "Marie Dubois"
+      "creator": "Marie Dubois",
+      "status": true
     },
     {
       "article_id": "57b2f6182b619b71c9250e4e3b933597",
@@ -626,7 +533,8 @@
       "language": "english",
       "country": ["egypt"],
       "category": ["entertainment"],
-      "creator": "Ahmed Mostafa"
+      "creator": "Ahmed Mostafa",
+      "status": true
     },
     {
       "article_id": "bc8b2b4804e7b9e9a7b75d94a3c4ed98",
@@ -641,9 +549,9 @@
       "language": "english",
       "country": ["india"],
       "category": ["entertainment"],
-      "creator": "Venkatesh Rao"
+      "creator": "Venkatesh Rao",
+      "status": true
     },
-
     {
       "article_id": "93ce76b0d2bb8594d719917dd05b020c",
       "title": "Ben Affleck Confirms JLo’s Romance with Warning to Her New Partner, Sources Say",
@@ -657,7 +565,8 @@
       "language": "english",
       "country": ["mexico"],
       "category": ["entertainment"],
-      "creator": "Espectáculos Noroeste"
+      "creator": "Espectáculos Noroeste",
+      "status": true
     },
     {
       "article_id": "7eebef8aa280cd6f13535db75c5449fd",
@@ -672,7 +581,8 @@
       "language": "english",
       "country": ["serbia"],
       "category": ["entertainment"],
-      "creator": "Jovan Marković"
+      "creator": "Jovan Marković",
+      "status": true
     },
     {
       "article_id": "67429248d6d29a4a56de42846cd6ccdd",
@@ -687,7 +597,8 @@
       "language": "english",
       "country": ["spain"],
       "category": ["entertainment"],
-      "creator": "Lucía Gómez"
+      "creator": "Lucía Gómez",
+      "status": true
     },
     {
       "article_id": "807022074641087690199d1bcfa1896c",
@@ -702,7 +613,8 @@
       "language": "english",
       "country": ["united arab emirates"],
       "category": ["entertainment"],
-      "creator": "Dar Al Khaleej"
+      "creator": "Dar Al Khaleej",
+      "status": true
     },
     {
       "article_id": "5db3162d97887507ccd9c4ec37aea6c9",
@@ -717,7 +629,8 @@
       "language": "english",
       "country": ["united kingdom"],
       "category": ["business", "health", "politics", "environment"],
-      "creator": "Valerie Martin"
+      "creator": "Valerie Martin",
+      "status": true
     },
     {
       "article_id": "a9cdeb0363a0b74718b640435646e34e",
@@ -732,7 +645,8 @@
       "language": "english",
       "country": ["brazil"],
       "category": ["environment"],
-      "creator": "Bruno Vital"
+      "creator": "Bruno Vital",
+      "status": true
     },
     {
       "article_id": "21feebfed9be6260e489183781af500a",
@@ -747,7 +661,8 @@
       "language": "english",
       "country": ["brazil"],
       "category": ["environment"],
-      "creator": "Felipe Salustino"
+      "creator": "Felipe Salustino",
+      "status": true
     },
     {
       "article_id": "24b1f2e02f387877fff1940538b9e9b2",
@@ -762,7 +677,8 @@
       "language": "english",
       "country": ["france"],
       "category": ["environment"],
-      "creator": "Claire Dubois"
+      "creator": "Claire Dubois",
+      "status": true
     },
     {
       "article_id": "9cfcbd6712d9875a01a3201dbb297c8d",
@@ -777,7 +693,8 @@
       "language": "english",
       "country": ["brazil"],
       "category": ["environment"],
-      "creator": "Mariana Costa"
+      "creator": "Mariana Costa",
+      "status": true
     },
     {
       "article_id": "11faa60c2765fe27495875b4914efc87",
@@ -792,7 +709,8 @@
       "language": "english",
       "country": ["france"],
       "category": ["environment"],
-      "creator": "Sophie Laurent"
+      "creator": "Sophie Laurent",
+      "status": true
     },
     {
       "article_id": "6b244b0c7d012bccd314a03ffd316f79",
@@ -807,7 +725,8 @@
       "language": "english",
       "country": ["germany"],
       "category": ["environment"],
-      "creator": "Lena Müller"
+      "creator": "Lena Müller",
+      "status": true
     },
     {
       "article_id": "f2559367391c462a7a2c060e4d4f2f5a",
@@ -822,7 +741,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["environment"],
-      "creator": "Freddy Vela"
+      "creator": "Freddy Vela",
+      "status": true
     },
     {
       "article_id": "d54503aa31e5ed131001fe2b5dc94169",
@@ -837,9 +757,9 @@
       "language": "english",
       "country": ["france"],
       "category": ["environment"],
-      "creator": "Julien Moreau"
+      "creator": "Julien Moreau",
+      "status": true
     },
-
     {
       "article_id": "be30ecb874f30ff1ca2822edd6732843",
       "title": "Report: 60% of Global AI Researchers Are From the U.S. and China",
@@ -862,7 +782,8 @@
         "jordan"
       ],
       "category": ["technology", "science"],
-      "creator": "Mona Ibrahim"
+      "creator": "Mona Ibrahim",
+      "status": true
     },
     {
       "article_id": "ef6c34a52d8de7652317e9b5a7647ad1",
@@ -877,7 +798,8 @@
       "language": "english",
       "country": ["portugal"],
       "category": ["sports"],
-      "creator": "João Silva"
+      "creator": "João Silva",
+      "status": true
     },
     {
       "article_id": "fb70dabf3687dd2e96c429cbfc2c503e",
@@ -892,7 +814,8 @@
       "language": "english",
       "country": ["ukraine"],
       "category": ["sports"],
-      "creator": "Olena Kovalenko"
+      "creator": "Olena Kovalenko",
+      "status": true
     },
     {
       "article_id": "0cc70787a58761ed3877f5c5911e3c31",
@@ -907,7 +830,8 @@
       "language": "english",
       "country": ["india"],
       "category": ["sports"],
-      "creator": "Zee News"
+      "creator": "Zee News",
+      "status": true
     },
     {
       "article_id": "1d3a242d02db17dfb9fe6a3ca1b34d76",
@@ -922,7 +846,8 @@
       "language": "english",
       "country": ["turkey"],
       "category": ["sports"],
-      "creator": "Emre Yılmaz"
+      "creator": "Emre Yılmaz",
+      "status": true
     },
     {
       "article_id": "aa281682be8643e2a10744643731074b",
@@ -937,7 +862,8 @@
       "language": "english",
       "country": ["italy"],
       "category": ["sports"],
-      "creator": "Giulia Rossi"
+      "creator": "Giulia Rossi",
+      "status": true
     },
     {
       "article_id": "e70de3d3362898222b5fa0e5f5a43feb",
@@ -952,7 +878,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["sports"],
-      "creator": "BBC"
+      "creator": "BBC",
+      "status": true
     },
     {
       "article_id": "5dae1486aa2129493b8c8b53d359cf00",
@@ -967,7 +894,8 @@
       "language": "english",
       "country": ["serbia"],
       "category": ["sports"],
-      "creator": "Aleksandar Golubović"
+      "creator": "Aleksandar Golubović",
+      "status": true
     },
     {
       "article_id": "48da244ffe960e15714733587d8b5fd5",
@@ -982,7 +910,8 @@
       "language": "english",
       "country": ["united arab emirates"],
       "category": ["sports"],
-      "creator": "Dar Al Khaleej"
+      "creator": "Dar Al Khaleej",
+      "status": true
     },
     {
       "article_id": "0879fac368b261e35e04393df714ea36",
@@ -997,7 +926,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["sports"],
-      "creator": "James Carter"
+      "creator": "James Carter",
+      "status": true
     },
     {
       "article_id": "69dadee3e07de6285aa0616f71404668",
@@ -1012,7 +942,8 @@
       "language": "english",
       "country": ["albania"],
       "category": ["sports"],
-      "creator": "Arben Krasniqi"
+      "creator": "Arben Krasniqi",
+      "status": true
     },
     {
       "article_id": "084981df75cf94fdabcc87640245b096",
@@ -1027,9 +958,9 @@
       "language": "english",
       "country": ["turkey"],
       "category": ["technology"],
-      "creator": "Ahmet Yılmaz"
+      "creator": "Ahmet Yılmaz",
+      "status": true
     },
-
     {
       "article_id": "24f7ddf5533a6334daebe33a08b9c0b2",
       "title": "Insomniac May Release Venom on PS5 Before Marvel’s Wolverine, Followed by Spider-Man 3",
@@ -1043,7 +974,8 @@
       "language": "english",
       "country": ["italy"],
       "category": ["technology"],
-      "creator": "Luca Bianchi"
+      "creator": "Luca Bianchi",
+      "status": true
     },
     {
       "article_id": "2f90af5f028daa1f9c331501c98d9cd6",
@@ -1058,9 +990,9 @@
       "language": "english",
       "country": ["mexico"],
       "category": ["technology"],
-      "creator": "Mauricio Herrera"
+      "creator": "Mauricio Herrera",
+      "status": true
     },
-
     {
       "article_id": "0b0af2949e0bffacec9c8790a535c7e7",
       "title": "‘I’m Really Sorry’: Jonathan Milan and Tim Merlier Disappointed to Miss Tour de France Sprint on Stage 1",
@@ -1074,9 +1006,9 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["technology"],
-      "creator": "Stephen Farrand"
+      "creator": "Stephen Farrand",
+      "status": true
     },
-
     {
       "article_id": "f477887369661f5e418ea1d5bdb50f2f",
       "title": "Honor Prepares Magic V Flip 2; Launch Scheduled for August with Minor Hardware Upgrades",
@@ -1090,7 +1022,8 @@
       "language": "english",
       "country": ["romania"],
       "category": ["technology"],
-      "creator": "Szilárd-Ervin Szőgyényi"
+      "creator": "Szilárd-Ervin Szőgyényi",
+      "status": true
     },
     {
       "article_id": "ef95124853ec1b1d4e4b0e9f5a2acd20",
@@ -1105,7 +1038,8 @@
       "language": "english",
       "country": ["united states of america"],
       "category": ["technology"],
-      "creator": "Allyn Tucker"
+      "creator": "Allyn Tucker",
+      "status": true
     },
     {
       "article_id": "f5b3d39fe1d189a4d62f11141ca44b03",
@@ -1120,7 +1054,8 @@
       "language": "kurdish",
       "country": ["south korea"],
       "category": ["world"],
-      "creator": "워싱턴=박국희 특파원"
+      "creator": "워싱턴=박국희 특파원",
+      "status": true
     },
     {
       "article_id": "30be2351b38c78d6bc2e40435f8c9a79",
@@ -1135,7 +1070,8 @@
       "language": "korean",
       "country": ["south korea"],
       "category": ["world"],
-      "creator": "매일경제"
+      "creator": "매일경제",
+      "status": true
     },
     {
       "article_id": "765df1cec0bc87575713bfa18a5c8063",
@@ -1150,7 +1086,8 @@
       "language": "spanish",
       "country": ["argentina"],
       "category": ["world"],
-      "creator": "Carlos Méndez"
+      "creator": "Carlos Méndez",
+      "status": true
     },
     {
       "article_id": "4c425c68daabd1ed8ef5a3971f2874f0",
@@ -1165,7 +1102,8 @@
       "language": "japanese",
       "country": ["japan"],
       "category": ["world"],
-      "creator": "Kenji Yamamoto"
+      "creator": "Kenji Yamamoto",
+      "status": true
     },
     {
       "article_id": "cce94ddc30016c44df026834ccb8377e",
@@ -1180,7 +1118,8 @@
       "language": "korean",
       "country": ["south korea"],
       "category": ["world"],
-      "creator": "Lee Seong-hoon"
+      "creator": "Lee Seong-hoon",
+      "status": true
     },
     {
       "article_id": "e3341d4b88e2fce6d122d5fd9505c731",
@@ -1195,7 +1134,8 @@
       "language": "english",
       "country": ["united kingdom"],
       "category": ["tourism"],
-      "creator": "Nicola Roy"
+      "creator": "Nicola Roy",
+      "status": true
     },
     {
       "article_id": "7ac9ce242d1c4102ceac7a3d51083017",
@@ -1210,7 +1150,8 @@
       "language": "malayalam",
       "country": ["india"],
       "category": ["tourism"],
-      "creator": null
+      "creator": null,
+      "status": true
     },
     {
       "article_id": "641185dd6ff35e80ca1744aaa237901c",
@@ -1225,7 +1166,8 @@
       "language": "english",
       "country": ["united kingdom"],
       "category": ["top", "tourism"],
-      "creator": "Steven Walker"
+      "creator": "Steven Walker",
+      "status": true
     },
     {
       "article_id": "80db983cbf4e2b8d8c0c72cd46c7cf55",
@@ -1240,7 +1182,8 @@
       "language": "english",
       "country": ["united kingdom"],
       "category": ["tourism"],
-      "creator": "Conor Wilson"
+      "creator": "Conor Wilson",
+      "status": true
     },
     {
       "article_id": "d5d5f0752ef47f032ae755f493a8cfbe",
@@ -1255,7 +1198,8 @@
       "language": "english",
       "country": ["new zealand"],
       "category": ["tourism"],
-      "creator": "Tamara Hinson"
+      "creator": "Tamara Hinson",
+      "status": true
     },
     {
       "article_id": "b244d5da16bdb1573f78e8020cdf1119",
@@ -1270,7 +1214,19 @@
       "language": "indonesian",
       "country": ["indonesia"],
       "category": ["tourism"],
-      "creator": null
+      "creator": null,
+      "status": true
+    },
+    {
+      "title": "Swat Tragedy and Safety Measures123",
+      "description": "The atmosphere in my city, Sialkot, is mournful due to the loss of lives in the Swat tragedy. Every citizen is grieving, and every face appears somber. From Daska to..",
+      "content": "Following the Swat tragedy, Sialkot is engulfed in sorrow. Citizens have emphasized the need for enhanced safety measures to prevent such incidents in the future.",
+      "pubDate": "",
+      "imageURL": "https://jang.com.pk/assets/uploads/akhbar/2025-07-06/b_1487803_035107_updates.jpg",
+      "category": ["business", "top"],
+      "creator": "",
+      "article_id": "7e8683d8d25311a32923a58a6295abd9",
+      "status": true
     }
   ]
 }

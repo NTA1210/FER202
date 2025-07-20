@@ -1,47 +1,78 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { getArticleById, categories } from "../utils/mockData";
 import {
   Button,
   Form,
   Spinner,
   Container,
-  Row,
-  Col,
   Card,
   Image,
+  Badge,
 } from "react-bootstrap";
-import { ArrowLeft, Image as ImageIcon, Save, X } from "react-bootstrap-icons";
+import { ArrowLeft, Save, X } from "react-bootstrap-icons";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  fetchNewDetail,
+  getAllCategories,
+  editArticle,
+} from "../actions/newsActions";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const EditArticlePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    title: "",
-    summary: "",
-    content: "",
-    categoryId: "",
-    image: "",
-    featured: false,
-  });
+
   const [errors, setErrors] = useState({});
 
+  const { news, loading, error, newDetail, categories } = useSelector(
+    (state) => state.news
+  );
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    content: "",
+    pubDate: "",
+    imageURL: "",
+    category: [],
+    creator: "",
+  });
+
+  const currentNew =
+    news.find((item) => String(item.article_id) === id) ||
+    (String(newDetail?.article_id) === id ? newDetail : null);
+
   useEffect(() => {
-    if (id) {
-      setTimeout(() => {
-        const article = getArticleById(Number(id));
-        if (article) {
-          setFormData({ ...article });
-        } else {
-          toast.error("Article not found");
-          navigate("/admin");
-        }
-        setIsLoading(false);
-      }, 500);
+    if (!currentNew) {
+      dispatch(fetchNewDetail(id));
     }
-  }, [id, navigate]);
+    if (categories.length === 0) {
+      dispatch(getAllCategories());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (currentNew) {
+      setFormData({
+        title: currentNew.title || "",
+        description: currentNew.description || "",
+        content: currentNew.content || "",
+        pubDate: currentNew.pubDate || "",
+        imageURL: currentNew.imageURL || "",
+        category: currentNew.category || [],
+        creator: currentNew.creator || "",
+      });
+    }
+  }, [currentNew]);
+
+  if (error) {
+    toast.error(error);
+  }
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,10 +88,11 @@ const EditArticlePage = () => {
   const validateForm = () => {
     const newErrors = {};
     if (!formData.title.trim()) newErrors.title = "Title is required";
-    if (!formData.summary.trim()) newErrors.summary = "Summary is required";
+    if (!formData.description.trim())
+      newErrors.description = "Description is required";
     if (!formData.content.trim()) newErrors.content = "Content is required";
-    if (!formData.categoryId) newErrors.categoryId = "Category is required";
-    if (!formData.image.trim()) newErrors.image = "Image URL is required";
+    if (!formData.category) newErrors.category = "Category is required";
+    if (!formData.imageURL.trim()) newErrors.imageURL = "Image URL is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -68,14 +100,26 @@ const EditArticlePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success("Article updated successfully");
-      navigate("/admin");
+      console.log("edit article", formData);
+      dispatch(editArticle(id, formData));
+      if (!error) {
+        toast.success("Article updated successfully");
+        navigate("/admin");
+      }
     } else {
       toast.error("Please fix the errors in the form");
     }
   };
 
-  if (isLoading) {
+  const handleChangeCategory = (e) => {
+    if (formData.category.includes(e.target.value)) return;
+    setFormData({
+      ...formData,
+      category: [...formData.category, e.target.value],
+    });
+  };
+
+  if (loading) {
     return (
       <Container className="py-5 text-center">
         <Spinner animation="border" variant="primary" />
@@ -83,6 +127,12 @@ const EditArticlePage = () => {
       </Container>
     );
   }
+  const handleDeleteCategory = (c) => {
+    setFormData({
+      ...formData,
+      category: formData.category.filter((item) => item !== c),
+    });
+  };
 
   return (
     <Container className="py-5">
@@ -102,7 +152,7 @@ const EditArticlePage = () => {
               <Form.Control
                 type="text"
                 name="title"
-                value={formData.title}
+                value={formData?.title}
                 onChange={handleChange}
                 isInvalid={!!errors.title}
               />
@@ -112,17 +162,17 @@ const EditArticlePage = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Summary *</Form.Label>
+              <Form.Label>Description *</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={2}
-                name="summary"
-                value={formData.summary}
+                name="description"
+                value={formData?.description}
                 onChange={handleChange}
-                isInvalid={!!errors.summary}
+                isInvalid={!!errors?.description}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.summary}
+                {errors?.description}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -130,48 +180,51 @@ const EditArticlePage = () => {
               <Form.Label>Category *</Form.Label>
               <Form.Select
                 name="categoryId"
-                value={formData.categoryId}
-                onChange={handleChange}
-                isInvalid={!!errors.categoryId}
+                value={formData?.category || ""}
+                onChange={(e) => handleChangeCategory(e)}
+                isInvalid={!!errors?.category}
+                multiple
               >
-                <option value="">Select category</option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
+                {/* <option value="">Select category</option> */}
+                {categories &&
+                  categories?.map((c, index) => (
+                    <option key={index} value={c}>
+                      {c}
+                    </option>
+                  ))}
               </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {errors.categoryId}
-              </Form.Control.Feedback>
-            </Form.Group>
+              <div className="d-flex align-items-center  mt-2">
+                {formData?.category.map((c, index) => (
+                  <Badge
+                    key={index}
+                    className="me-2 bg-gradient border border-0 rounded-pill fw-semibold"
+                  >
+                    {c} <X onClick={() => handleDeleteCategory(c)} />
+                  </Badge>
+                ))}
+              </div>
 
-            <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label="Feature this article"
-                name="featured"
-                checked={formData.featured}
-                onChange={handleChange}
-              />
+              <Form.Control.Feedback type="invalid">
+                {errors?.category}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Image URL *</Form.Label>
               <Form.Control
                 type="text"
-                name="image"
-                value={formData.image}
+                name="imageURL"
+                value={formData?.imageURL}
                 onChange={handleChange}
-                isInvalid={!!errors.image}
+                isInvalid={!!errors?.imageURL}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.image}
+                {errors?.imageURL}
               </Form.Control.Feedback>
-              {formData.image && (
+              {formData?.imageURL && (
                 <div className="mt-2 position-relative">
                   <Image
-                    src={formData.image}
+                    src={formData?.imageURL}
                     thumbnail
                     onError={(e) => {
                       e.target.src =
@@ -183,7 +236,7 @@ const EditArticlePage = () => {
                     variant="light"
                     size="sm"
                     className="position-absolute top-0 end-0 m-2"
-                    onClick={() => setFormData({ ...formData, image: "" })}
+                    onClick={() => setFormData({ ...formData, imageURL: "" })}
                   >
                     <X />
                   </Button>
@@ -197,12 +250,12 @@ const EditArticlePage = () => {
                 as="textarea"
                 rows={10}
                 name="content"
-                value={formData.content}
+                value={formData?.content}
                 onChange={handleChange}
-                isInvalid={!!errors.content}
+                isInvalid={!!errors?.content}
               />
               <Form.Control.Feedback type="invalid">
-                {errors.content}
+                {errors?.content}
               </Form.Control.Feedback>
             </Form.Group>
 

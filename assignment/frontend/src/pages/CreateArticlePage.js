@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Image, Save, X } from "lucide-react";
+import { ArrowLeft, Image as ImageIcon, Save, X } from "lucide-react";
 import { toast } from "sonner";
-import { categories } from "../utils/mockData";
-import {
-  Button,
-  Card,
-  Form,
-  Container,
-  Row,
-  Col,
-  Image as RBImage,
-} from "react-bootstrap";
+import { Button, Card, Form, Container, Badge, Image } from "react-bootstrap";
+
+import { useSelector, useDispatch } from "react-redux";
+import { createArticle, getAllCategories } from "../actions/newsActions";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 
 const CreateArticlePage = () => {
   const navigate = useNavigate();
+  const { loading, categories, error } = useSelector((state) => state.news);
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     title: "",
-    summary: "",
+    description: "",
     content: "",
-    categoryId: "",
-    image: "",
-    featured: false,
+    pubDate: "",
+    imageURL: "",
+    category: [],
+    creator: "",
   });
   const [errors, setErrors] = useState({});
 
@@ -38,14 +36,29 @@ const CreateArticlePage = () => {
       });
     }
   };
+  const handleChangeCategory = (e) => {
+    if (formData.category.includes(e.target.value) || !e.target.value.trim())
+      return;
+    setFormData({
+      ...formData,
+      category: [...formData.category, e.target.value],
+    });
+  };
+  const handleDeleteCategory = (c) => {
+    setFormData({
+      ...formData,
+      category: formData.category.filter((item) => item !== c),
+    });
+  };
 
   const validateForm = () => {
     const newErrors = {};
     if (!formData.title.trim()) newErrors.title = "Title is required";
-    if (!formData.summary.trim()) newErrors.summary = "Summary is required";
+    if (!formData.description.trim())
+      newErrors.description = "Description is required";
     if (!formData.content.trim()) newErrors.content = "Content is required";
-    if (!formData.categoryId) newErrors.categoryId = "Category is required";
-    if (!formData.image.trim()) newErrors.image = "Image URL is required";
+    if (!formData.category) newErrors.category = "Category is required";
+    if (!formData.imageURL.trim()) newErrors.imageURL = "Image URL is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -53,13 +66,26 @@ const CreateArticlePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success("Article created successfully");
-      navigate("/admin");
+      console.log("edit article", formData);
+      dispatch(createArticle(formData));
+      if (!error) {
+        toast.success("Article updated successfully");
+        navigate("/admin");
+      }
     } else {
       toast.error("Please fix the errors in the form");
     }
   };
 
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(getAllCategories());
+    }
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
   return (
     <Container className="py-5">
       <div className="d-flex align-items-center mb-4">
@@ -80,9 +106,9 @@ const CreateArticlePage = () => {
               <Form.Control
                 type="text"
                 name="title"
-                value={formData.title}
+                value={formData?.title}
                 onChange={handleChange}
-                isInvalid={!!errors.title}
+                isInvalid={!!errors?.title}
                 placeholder="Enter article title"
               />
               <Form.Control.Feedback type="invalid">
@@ -91,18 +117,18 @@ const CreateArticlePage = () => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Summary *</Form.Label>
+              <Form.Label>Description *</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={2}
-                name="summary"
-                value={formData.summary}
+                name="description"
+                value={formData?.description}
                 onChange={handleChange}
-                isInvalid={!!errors.summary}
+                isInvalid={!!errors?.description}
                 placeholder="Brief summary of the article"
               />
               <Form.Control.Feedback type="invalid">
-                {errors.summary}
+                {errors?.description}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -110,70 +136,65 @@ const CreateArticlePage = () => {
               <Form.Label>Category *</Form.Label>
               <Form.Select
                 name="categoryId"
-                value={formData.categoryId}
-                onChange={handleChange}
-                isInvalid={!!errors.categoryId}
+                value={formData?.category || ""}
+                onChange={(e) => handleChangeCategory(e)}
+                isInvalid={!!errors?.category}
+                multiple
               >
                 <option value="">Select a category</option>
-                {categories.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
+                {categories &&
+                  categories.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
               </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                {errors.categoryId}
-              </Form.Control.Feedback>
-            </Form.Group>
+              <div className="d-flex align-items-center  mt-2">
+                {formData?.category.map((c, index) => (
+                  <Badge
+                    key={index}
+                    className="me-2 bg-gradient border border-0 rounded-pill fw-semibold"
+                  >
+                    {c} <X size={16} onClick={() => handleDeleteCategory(c)} />
+                  </Badge>
+                ))}
+              </div>
 
-            <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label="Feature this article (displayed prominently on homepage)"
-                name="featured"
-                checked={formData.featured}
-                onChange={handleChange}
-              />
+              <Form.Control.Feedback type="invalid">
+                {errors?.category}
+              </Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Image URL *</Form.Label>
-              <div className="d-flex">
-                <Form.Control
-                  type="text"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                  isInvalid={!!errors.image}
-                  placeholder="Enter image URL"
-                />
-                <span className="input-group-text bg-light border">
-                  <Image size={16} />
-                </span>
-              </div>
+              <Form.Control
+                type="text"
+                name="imageURL"
+                value={formData?.imageURL}
+                onChange={handleChange}
+                isInvalid={!!errors?.imageURL}
+              />
               <Form.Control.Feedback type="invalid">
-                {errors.image}
+                {errors?.imageURL}
               </Form.Control.Feedback>
-              {formData.image && (
-                <div className="position-relative mt-2">
-                  <RBImage
-                    src={formData.image}
-                    alt="Preview"
-                    height={160}
-                    rounded
+              {formData?.imageURL && (
+                <div className="mt-2 position-relative">
+                  <Image
+                    src={formData?.imageURL}
+                    thumbnail
                     onError={(e) => {
-                      e.target.onerror = null;
                       e.target.src =
                         "https://via.placeholder.com/640x360?text=Invalid+Image+URL";
                     }}
+                    className="w-100"
                   />
                   <Button
                     variant="light"
                     size="sm"
-                    onClick={() => setFormData({ ...formData, image: "" })}
-                    className="position-absolute top-0 end-0 m-1"
+                    className="position-absolute top-0 end-0 m-2"
+                    onClick={() => setFormData({ ...formData, imageURL: "" })}
                   >
-                    <X size={16} />
+                    <X />
                   </Button>
                 </div>
               )}
@@ -185,13 +206,13 @@ const CreateArticlePage = () => {
                 as="textarea"
                 rows={10}
                 name="content"
-                value={formData.content}
+                value={formData?.content}
                 onChange={handleChange}
-                isInvalid={!!errors.content}
+                isInvalid={!!errors?.content}
                 placeholder="Write your article content here... (HTML formatting supported)"
               />
               <Form.Control.Feedback type="invalid">
-                {errors.content}
+                {errors?.content}
               </Form.Control.Feedback>
             </Form.Group>
 

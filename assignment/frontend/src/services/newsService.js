@@ -49,15 +49,6 @@ const createArticle = async (data) => {
   }
 };
 
-const updateArticle = async (id, data) => {
-  try {
-    const response = await put(`/${id}`, data);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const deleteArticle = async (id) => {
   try {
     const response = await del(`/${id}`);
@@ -85,6 +76,15 @@ const getAllCategories = async () => {
   }
 };
 
+const editArticle = async (id, data) => {
+  try {
+    const response = await put(`/${id}`, data);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const newsService = {
   getNews,
   getTopNew,
@@ -92,6 +92,9 @@ const newsService = {
   getArticleById,
   searchArticles,
   getAllCategories,
+  editArticle,
+  deleteArticle,
+  createArticle,
 };
 
 export default newsService;
