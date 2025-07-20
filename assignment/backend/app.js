@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const fs = require("fs").promises;
 const cors = require("cors");
+const crypto = require("crypto");
 
 // ✅ Bật CORS mặc định (cho phép mọi origin)
 app.use(cors());
@@ -20,10 +21,26 @@ app.use(
 const loadNews = async () => {
   try {
     const data = await fs.readFile("./news.json", "utf-8");
-    return JSON.parse(data).news;
+    const results = JSON.parse(data).news.filter(
+      (item) => item.status === true
+    );
+    return results;
   } catch (err) {
     console.log(err);
   }
+};
+const loadUsers = async () => {
+  try {
+    const data = await fs.readFile("./users.json", "utf-8");
+    const results = JSON.parse(data).users;
+    return results;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const renderId = () => {
+  return crypto.randomBytes(16).toString("hex");
 };
 
 function paginate(array, req) {
@@ -101,7 +118,98 @@ app.get("/api/news/:id", async (req, res) => {
   const id = req.params.id;
   const news = await loadNews();
   const article = news.find((article) => article.article_id === id);
+  if (!article) {
+    res.status(404).send("Article not found");
+    return;
+  }
   res.send(article);
+});
+
+async function saveNews(news) {
+  console.log("🔧 saveNews() called. Saving data to file...");
+  await fs.writeFile("./news.json", JSON.stringify({ news }, null, 2));
+  console.log("✅ File saved!");
+}
+async function saveUsers(users) {
+  console.log("🔧 saveNews() called. Saving data to file...");
+  await fs.writeFile("./users.json", JSON.stringify({ users }, null, 2));
+  console.log("✅ File saved!");
+}
+
+app.put("/api/news/:id", async (req, res) => {
+  const id = req.params.id;
+  const news = await loadNews();
+  const articleIndex = news.findIndex((article) => article.article_id === id);
+  if (articleIndex === -1) {
+    res.status(404).send("Article not found");
+    return;
+  }
+  news[articleIndex] = { ...news[articleIndex], ...req.body };
+  await saveNews(news);
+
+  res.send({
+    id,
+    ...news[articleIndex],
+  });
+});
+
+app.delete("/api/news/:id", async (req, res) => {
+  const id = req.params.id;
+  const news = await loadNews();
+  const articleIndex = news.findIndex((article) => article.article_id === id);
+  if (articleIndex === -1) {
+    res.status(404).send("Article not found");
+    return;
+  }
+  news[articleIndex] = { ...news[articleIndex], status: false };
+  await saveNews(news);
+  res.send({ id });
+});
+
+app.post("/api/news", async (req, res) => {
+  const news = await loadNews();
+  const newArticle = {
+    ...req.body,
+    article_id: renderId(),
+    status: true,
+  };
+  news.push(newArticle);
+  await saveNews(news);
+  console.log("✅ Article added!", newArticle.article_id);
+
+  res.send(newArticle);
+});
+
+app.post("/api/news/login", async (req, res) => {
+  const users = await loadUsers();
+  const { username, password } = req.body;
+
+  const user = users.find((user) => user.username === username);
+  if (!user) {
+    res.status(400).send("User name or password is incorrect");
+    return;
+  }
+  if (user.password !== password) {
+    res.status(400).send("User name or password is incorrect");
+    return;
+  }
+  res.send(user);
+});
+
+app.post("/api/news/register", async (req, res) => {
+  const users = await loadUsers();
+  const { username, password } = req.body;
+  const user = users.find((user) => user.username === username);
+  if (user) {
+    res.status(400).send("User already exists");
+    return;
+  }
+  users.push({
+    username,
+    password,
+  });
+  await saveUsers(users);
+  res.send({ username, password });
 });
 
 app.listen(process.env.PORT, () => {

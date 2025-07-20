@@ -15,9 +15,11 @@ import { Search } from "lucide-react";
 import AdminTableRow from "../components/AdminTableRow";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
-import { searchArticles } from "../actions/newsActions";
+import { searchArticles, deleteArticle } from "../actions/newsActions";
 import newsService from "../services/newsService";
 
 const sortOptions = [
@@ -27,7 +29,7 @@ const sortOptions = [
 
 const AdminPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   // Get query params
   const q = searchParams.get("q") || "";
   const category = searchParams.get("category") || "";
@@ -48,7 +50,7 @@ const AdminPage = () => {
   useEffect(() => {
     dispatch(searchArticles({ q, category, page, sort }));
     setSearchTerm(q); // đồng bộ input khi query thay đổi từ bên ngoài
-  }, [q, category, page, sort, dispatch]);
+  }, [q, category, page, sort, articleToDelete, dispatch]);
 
   // Fetch categories
   useEffect(() => {
@@ -104,13 +106,34 @@ const AdminPage = () => {
     setSearchParams(query);
   };
 
-  const handleDelete = () => {
-    // Logic xóa bài viết ở đây nếu cần
+  const handleDelete = async (id) => {
+    try {
+      dispatch(deleteArticle(id)); // ✅ đợi xóa xong
+      setArticleToDelete(null);
+      toast.success("Deleted successfully");
+    } catch (error) {
+      toast.error(error?.message || "Delete failed");
+    }
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <Container className="py-5">
-      <h2 className="mb-4">Manage Articles</h2>
+      <Row className="align-items-center mb-4">
+        <Col>
+          <h2 className="mb-0">Manage Articles</h2>
+        </Col>
+        <Col className="text-end">
+          <Button variant="success" onClick={() => navigate("/admin/create")}>
+            Create News
+          </Button>
+        </Col>
+      </Row>
 
       {/* Filter Bar */}
       <Row className="align-items-center mb-4">
@@ -246,7 +269,10 @@ const AdminPage = () => {
           <Button variant="secondary" onClick={() => setArticleToDelete(null)}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
+          <Button
+            variant="danger"
+            onClick={() => handleDelete(articleToDelete.article_id)}
+          >
             Delete
           </Button>
         </Modal.Footer>

@@ -11,27 +11,24 @@ import {
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Search, Menu, X } from "lucide-react";
 
-import newsService from "../services/newsService";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCategories } from "../actions/newsActions";
+import { logout } from "../actions/userActions";
 
 const Navigation = () => {
   const [expanded, setExpanded] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { categories } = useSelector((state) => state.news);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  // Fetch danh mục từ BE
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await newsService.getAllCategories();
-        setCategories(response.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
+    if (categories.length === 0) {
+      dispatch(getAllCategories());
+    }
+  }, [categories, dispatch]);
 
   // Cập nhật giá trị input từ URL nếu có
   useEffect(() => {
@@ -64,6 +61,10 @@ const Navigation = () => {
     navigate(`/search?${query.toString()}`);
     setExpanded(false);
   };
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/", { replace: true });
+  };
 
   return (
     <Navbar expand="md" className="py-2 shadow bg-white" expanded={expanded}>
@@ -85,6 +86,35 @@ const Navigation = () => {
           id="main-navbar"
           className="d-md-flex justify-content-end align-items-center"
         >
+          {user ? (
+            <Button
+              variant="link"
+              className="fw-semibold"
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Button
+                as={Link}
+                to="/login"
+                variant="link"
+                className="fw-semibold"
+              >
+                Login
+              </Button>
+              <Button
+                as={Link}
+                to="/register"
+                variant="link"
+                className="fw-semibold"
+              >
+                Sign up
+              </Button>
+            </>
+          )}
+
           {/* Dropdown category */}
           <Dropdown title="Category" id="basic-nav-dropdown">
             <Dropdown.Toggle variant="text" id="dropdown-basic">
@@ -115,9 +145,15 @@ const Navigation = () => {
             <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
               Latest
             </Nav.Link>
-            <Nav.Link as={Link} to="/admin" onClick={() => setExpanded(false)}>
-              Admin
-            </Nav.Link>
+            {user?.role === "admin" && (
+              <Nav.Link
+                as={Link}
+                to="/admin"
+                onClick={() => setExpanded(false)}
+              >
+                Admin
+              </Nav.Link>
+            )}
           </Nav>
 
           {/* Search bar */}

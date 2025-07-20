@@ -6,6 +6,12 @@ import {
   FETCH_NEW_DETAIL_SUCCESS,
   FETCH_NEW_DETAIL_FAILURE,
   FETCH_TOP_NEW,
+  FETCH_ALL_CATEGORIES_SUCCESS,
+  FETCH_ALL_CATEGORIES_FAILURE,
+  DELETE_ARTICLE_SUCCESS,
+  DELETE_ARTICLE_FAILURE,
+  CREATE_ARTICLE_SUCCESS,
+  CREATE_ARTICLE_FAILURE,
 } from "../actions/newsActions";
 
 const initialState = {
@@ -14,6 +20,7 @@ const initialState = {
   news: [],
   newDetail: null,
   topNew: null,
+  categories: [],
   pagination: {
     page: 1,
     totalPages: 1,
@@ -48,6 +55,25 @@ const newsReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: action.payload };
     case FETCH_TOP_NEW:
       return { ...state, loading: false, topNew: action.payload };
+    case FETCH_ALL_CATEGORIES_SUCCESS:
+      return { ...state, loading: false, categories: action.payload };
+    case FETCH_ALL_CATEGORIES_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case DELETE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        news: state.news.filter((item) => item.id !== action.payload),
+      };
+    case DELETE_ARTICLE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case CREATE_ARTICLE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case CREATE_ARTICLE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     default:
       return state;
   }
